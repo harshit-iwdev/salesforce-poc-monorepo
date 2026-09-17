@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: ./salesforce-poc-be
+      dockerfile: Dockerfile
+    container_name: salesforce-poc-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "3000:3000"
+    env_file:
+      - ./salesforce-poc-be/.env
+    environment:
+      - PORT=8000
+    volumes:
+      - ./salesforce-poc-be/.salesforce-token.json:/app/.salesforce-token.json
+      - ./salesforce-poc-be/.salesforce-sessions.json:/app/.salesforce-sessions.json
+    networks:
+      - sf-network
+
+  frontend:
+    build:
+      context: ./salesforce-poc-fe
+      dockerfile: Dockerfile
+    container_name: salesforce-poc-frontend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+      - PORT=3001
+    depends_on:
+      - backend
+    networks:
+      - sf-network
+
+networks:
+  sf-network:
+    driver: bridge

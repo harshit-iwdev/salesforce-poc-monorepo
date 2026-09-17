@@ -1,0 +1,22 @@
+{
+  "name": "salesforce-poc-workspace",
+  "version": "1.0.0",
+  "description": "Salesforce POC Fullstack Workspace: NestJS Backend & Next.js Frontend Console",
+  "private": true,
+  "scripts": {
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "predev": "fuser -k 8000/tcp 3001/tcp 3000/tcp 2>/dev/null || true",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"BACKEND,FRONTEND\" -c \"blue.bold,cyan.bold\" \"npm --prefix salesforce-poc-be run dev\" \"npm --prefix salesforce-poc-fe run dev\"",
+    "dev:be": "npm --prefix salesforce-poc-be run dev",
+    "dev:fe": "npm --prefix salesforce-poc-fe run dev",
+    "build": "npm --prefix salesforce-poc-be run build && npm --prefix salesforce-poc-fe run build",
+    "build:be": "npm run build --workspace=salesforce-poc-be",
+    "build:fe": "npm run build --workspace=salesforce-poc-fe",
+    "test": "npm --prefix salesforce-poc-be test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
