@@ -1,4 +1,62 @@
-# compiled output
-/dist
-/node_modules
-/build
+# Dependencies (matches root and all nested packages)
+node_modules/
+**/node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+**/dist/
+build/
+**/build/
+.next/
+**/.next/
+out/
+**/out/
+
+# Environment files & secrets
+.env
+.env.*
+!.env.example
+.salesforce-token.json
+.salesforce-sessions.json
+**/.salesforce-token.json
+**/.salesforce-sessions.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing & Coverage
+coverage/
+**/coverage/
+.nyc_output/
+
+# TypeScript cache
+*.tsbuildinfo
+next-env.d.ts
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-workspace
+*.swp
+*.swo
+
+# Temporary files
+.temp/
+.tmp/
+pids
+*.pid
+*.seed
+*.pid.lock
